@@ -54,6 +54,9 @@
 #define MIDI_NOTE_OFF 0b10000000
 
 void setup() {  
+  
+  pinMode(13, OUTPUT);
+
   // Initialize serial port to get midi messages
   Serial.begin(57600);
   
@@ -69,14 +72,25 @@ void setup() {
 }
 
 void loop() {  
-  
+/*  
   int i=0;
-  for(i=0;i<128;i++){
+  for(i=24;i<102;i++){
     CV_DAC_SetNote(i);
     CV_Set_Gate(1);
     delay(100);
     CV_Set_Gate(0);
   }
+*/
+
+    int note = random(24,102);
+    CV_DAC_SetNote(note);
+    digitalWrite(13, HIGH);
+    CV_Set_Gate(1);
+    delay(50);
+    digitalWrite(13, LOW);
+
+    delay(50);
+    CV_Set_Gate(0);
 
 }
 
